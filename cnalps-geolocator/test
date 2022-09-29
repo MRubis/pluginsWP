@@ -1,0 +1,49 @@
+<?php
+/*
+Plugin Name: CNAlpsGeolocate
+Author: Marina Rubis
+
+*/
+?>
+
+
+
+<?php
+
+class CNAlpsGeolocate extends WP_Widget
+{
+
+    public function __construct()
+    {
+        add_shortcode('CNAlpsGeolocate', array($this, 'cnalps_register_geolocate_shortcode'));
+    }
+
+    public function cnalps_register_geolocate_shortcode()
+    {
+
+
+echo'<div id="cnalps-map" style="width: 100%; height: 300px;"></div>';
+?>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.js"></script>
+
+<script>
+    let map = L.map('cnalps-map').setView([44.73028, 5.02356], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    L.marker([44.73028, 5.02356]).addTo(map)
+        .bindPopup('La Tour de Crest')
+        .openPopup();
+
+</script>
+<?php
+
+    }
+}
+
+$CNAlpsGeolocate = new CNAlpsGeolocate();
+
+?>
+
